@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import axios from 'axios';
-import { color } from 'react-native-reanimated';
+import moment from 'moment';
 
 const Coupons = props => {
   const [coupons, setCoupons] = useState([]);
@@ -82,6 +82,15 @@ if(loading){
   return (
     <View>
       <ScrollView>
+      <View style={{
+    paddingVertical: 11,
+
+    width: '100%',
+    borderRadius: 3,
+marginTop: 15,
+ }}>
+    <Text style={styles.header}>{"Benefit Kupon Untuk Kamu"}</Text>
+ </View>
         <View style={styles.container}>
             
           {coupons
@@ -89,7 +98,6 @@ if(loading){
             //   pokemon.couponBrandName.toLowerCase().includes(searchfeild.toLowerCase())
             // )
             .map((pokemon, index) => {
-                console.log('pokemon image', pokemon.couponBrandLogo )
               return (
    
 
@@ -106,12 +114,19 @@ if(loading){
 />
  <View style={styles.infoContainer}>
  <Text style={styles.name}>{pokemon.couponBrandName}</Text>
- <Text style={styles.discount}>{pokemon.couponQuota}</Text>
- <Text style={styles.promo}>{"Promo Sampai 31 Desember 2022"}</Text>
+ <Text style={styles.discount}>{pokemon.couponQuota}{"%"} <Text style={{
+      fontSize: 16,
+      fontWeight: 'bold',
+     marginTop: 15,
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      color: '#868788'
+ }}>{"Off"}</Text></Text>
+ <Text style={styles.promo}>{"Promo Sampai"} {moment(pokemon.couponEndDate).format('DD-MMM-YYYY')}</Text>
  <View style={{
     paddingVertical: 11,
     backgroundColor: '#26D27F',
-    width: '100%',
+    width: '130%',
     borderRadius: 3,
 marginTop: 15,
  }}>
@@ -214,6 +229,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
     color: 'white'
+    
+  },
+
+  header: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    textAlign: 'center',
+    color: 'black'
     
   },
   promo: {
