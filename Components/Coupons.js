@@ -20,57 +20,22 @@ const Coupons = props => {
     fetchCoupons();
   }, []);
 
-//   const fetchCoupons = () => {
-//     fetch('https://user1673281842743.requestly.dev/getCoupon')
-//       .then(response => response.json())
-//       .then(coupons => setCoupons(coupons.result));
-      
-//   };
 
+
+  // Fetch Index
   const fetchCoupons = async () =>{
     setLoading(true);
     try {
       const {data: response} = await axios.get('https://user1673281842743.requestly.dev/getCoupon');
       setCoupons(response.result);
     } catch (error) {
-      console.error(error.message);
+    //   console.error(error.message);
     }
     setLoading(false);
   }
 
-// const fetchCoupons = () => {
-//     axios
-//         .get("https://pokeapi.co/api/v2/pokemon?limit=500")
-//         .then((coupons) => {
-//             setCoupons(coupons.results);
-//         });
-// };
 
-// const fetchCoupons = async () => {
-//     try {
-//       const response = await axios.get(
-//         'https://pokeapi.co/api/v2/pokemon?limit=500',
-//       );
-//       alert(JSON.stringify(response.results))
-//       .then(coupons => setCoupons(coupons.results));
-//     } catch (error) {
-//       // handle error
-//       alert(error.message);
-//     }
-//   };
-
-//   // Make function to call the api
-//   const fetchCoupons = async () =>{
-//     setLoading(true);
-//     try {
-//       const {coupons: response} = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=500');
-//       setCoupons(response.results);
-//     } catch (error) {
-//       console.error(error.message);
-//     }
-//     setLoading(false);
-//   }
-
+// Condition when Fetch
 if(loading){
     return(
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -94,27 +59,19 @@ marginTop: 15,
         <View style={styles.container}>
             
           {coupons
-            // .filter(pokemon =>
-            //   pokemon.couponBrandName.toLowerCase().includes(searchfeild.toLowerCase())
-            // )
-            .map((pokemon, index) => {
+            .map((coupon, index) => {
               return (
    
 
 <TouchableOpacity style={styles.card} 
-//  onPress={() =>
-//                     props.navigation.navigate('Details', {
-//                       pokemon: pokemon.couponBrandName,
-//                     })
-//                   }
                   key={index}>
 <Image
   style={styles.thumb}
-  source={{uri: pokemon.couponBrandLogo}}
+  source={{uri: coupon.couponBrandLogo}}
 />
  <View style={styles.infoContainer}>
- <Text style={styles.name}>{pokemon.couponBrandName}</Text>
- <Text style={styles.discount}>{pokemon.couponQuota}{"%"} <Text style={{
+ <Text style={styles.name}>{coupon.couponBrandName}</Text>
+ <Text style={styles.discount}>{coupon.couponQuota}{"%"} <Text style={{
       fontSize: 16,
       fontWeight: 'bold',
      marginTop: 15,
@@ -122,7 +79,7 @@ marginTop: 15,
       justifyContent: 'center',
       color: '#868788'
  }}>{"Off"}</Text></Text>
- <Text style={styles.promo}>{"Promo Sampai"} {moment(pokemon.couponEndDate).format('DD-MMM-YYYY')}</Text>
+ <Text style={styles.promo}>{"Promo Sampai"} {moment(coupon.couponEndDate).format('DD-MMM-YYYY')}</Text>
  <View style={{
     paddingVertical: 11,
     backgroundColor: '#26D27F',
@@ -147,37 +104,6 @@ marginTop: 15,
 export default Coupons;
 
 const styles = StyleSheet.create({
-//   container: {
-//     display: 'flex',
-//     flexDirection: 'row',
-//     flexWrap: 'wrap',
-//     justifyContent: 'center',
-//     marginTop: 30,
-//   },
-//   card: {
-//     display: 'flex',
-//     alignItems: 'center',
-//     borderBottomWidth: 1,
-//     borderBottomColor: 'black',
-//     marginHorizontal: 20,
-//     marginVertical: 10,
-//   },
-//   searchCont: {
-//     position: 'absolute',
-//     marginBottom: 70,
-//     left: '20%',
-//     zIndex: 1,
-//     marginTop: 10,
-//   },
-//   searchfeild: {
-//     height: 40,
-//     borderWidth: 1,
-//     borderColor: '#000',
-//     textAlign: 'center',
-//     width: 250,
-//     borderRadius: 50,
-//   },
-
   //style
   card: {
     backgroundColor: 'white',
@@ -195,13 +121,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 13,
   },
   thumb: {
-    // height: 175,
-    borderTopLeftRadius: 16,
-  
+    borderTopLeftRadius: 16,  
     borderBottomLeftRadius: 16,
-
-    // paddingHorizontal: 60,
-    // paddingVertical: 60,
     width: '40%',
   },
   infoContainer: {
@@ -210,7 +131,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: 'bold',
-    // textAlign: 'right',
     alignItems: 'flex-start',
     justifyContent: 'center'
   },
