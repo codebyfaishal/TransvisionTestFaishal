@@ -7,25 +7,36 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import axios from 'axios';
 import { color } from 'react-native-reanimated';
 
 const Coupons = props => {
   const [coupons, setCoupons] = useState([]);
-  const [searchfeild, setSearchfeild] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchCoupons();
   }, []);
 
-  const fetchCoupons = () => {
-    fetch('https://user1673281842743.requestly.dev/getCoupon')
-      .then(response => response.json())
-      .then(coupons => setCoupons(coupons.result));
+//   const fetchCoupons = () => {
+//     fetch('https://user1673281842743.requestly.dev/getCoupon')
+//       .then(response => response.json())
+//       .then(coupons => setCoupons(coupons.result));
       
-  };
+//   };
+
+  const fetchCoupons = async () =>{
+    setLoading(true);
+    try {
+      const {data: response} = await axios.get('https://user1673281842743.requestly.dev/getCoupon');
+      setCoupons(response.result);
+    } catch (error) {
+      console.error(error.message);
+    }
+    setLoading(false);
+  }
 
 // const fetchCoupons = () => {
 //     axios
@@ -60,6 +71,13 @@ const Coupons = props => {
 //     setLoading(false);
 //   }
 
+if(loading){
+    return(
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <ActivityIndicator size="large" color="#26D27F" />
+        </View>
+    );
+}
 
   return (
     <View>
