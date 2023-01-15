@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import moment from 'moment';
+import { Button } from "native-base";
 
 const Coupons = props => {
     const [coupons, setCoupons] = useState([]);
@@ -81,13 +82,11 @@ const Coupons = props => {
                                         }}>{"Off"}</Text></Text>
                                         <Text style={styles.promo}>{"Promo Sampai"} {moment(coupon.couponEndDate).format('DD-MMM-YYYY')}</Text>
                                         <View style={{
-                                            paddingVertical: 11,
-                                            backgroundColor: '#26D27F',
-                                            width: '130%',
+                                            width: '100%',
                                             borderRadius: 3,
                                             marginTop: 15,
                                         }}>
-                                            <Text style={styles.tukarkan}>{"Tukarkan"}</Text>
+                                            <Button colorScheme="emerald" onPress={() => console.log("hello world")}>Click Me</Button>
                                         </View>
                                     </View>
 
