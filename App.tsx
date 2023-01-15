@@ -1,39 +1,87 @@
-//App.js
-import React, {Component} from 'react';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-import Coupons from './Components/Coupons';
-// import Details from './Components/Details';
+import 'react-native-gesture-handler';
+import  React from 'react';
+import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
+
+
+import { NavigationContainer } from '@react-navigation/native';
+
+import { createStackNavigator } from '@react-navigation/stack';
 import { NativeBaseProvider } from 'native-base';
 
-const appNavigator = createStackNavigator(
-  {
-    Home: {
-      screen: Coupons,
-    },
-    // Details: {
-    //   screen: Details,
-    // },
-  },
-  {
-    initialRouteName: 'Home',
-  },
-);
+import Coupons from './Components/Coupons';
 
-const AppContainer = createAppContainer(appNavigator);
+const Stack = createStackNavigator();
 
-// class App extends Component {
-//   render() {
-//     return <AppContainer />;
-//   }
-// }
+
+
+
 
 export default function App() {
   return (
     <NativeBaseProvider>
-       <AppContainer />
+    <NavigationContainer>
+      <Stack.Navigator>
+        {/* <Stack.Screen name="Home" component={Coupons} /> */}
+        <Stack.Screen
+          name=" "
+          component={Coupons}
+          options={({navigation}) => ({
+            // headerTitle: () => <Text>Register</Text>,
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            
+            headerRight: () =>  <View style={styles.headerRight}>
+            <TouchableOpacity>
+            <Image
+        // style={{width: 50, height: 50, marginHorizontal:13 }}
+        source={require('./Components/assets/IconToogle.png')}
+      />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ marginLeft: 10 }}
+              // onPress={playgroundNavigate}
+            >
+              <Image
+        // style={{width: 50, height: 50, marginHorizontal:13 }}
+        source={require('./Components/assets/Profile.png')}
+      />
+            </TouchableOpacity>
+          </View>,
+            headerLeft: () => <Image
+            // style={{width: 350, height: 350, marginHorizontal:13 }}
+            source={require('./Components/assets/LogoCubmu.png')}
+          />,
+          })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
     </NativeBaseProvider>
   );
 }
 
-// export default App;
+const styles = StyleSheet.create({
+  headerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#397af8',
+    marginBottom: 20,
+    width: '100%',
+    paddingVertical: 15,
+  },
+  heading: {
+    color: 'white',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  headerRight: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 5,
+  },
+  subheaderText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  });
