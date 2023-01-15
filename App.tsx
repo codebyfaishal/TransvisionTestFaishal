@@ -6,12 +6,53 @@ import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from 'react-n
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import { NativeBaseProvider } from 'native-base';
 
 import Coupons from './Components/Coupons';
 
 const Stack = createStackNavigator();
+const Tab = createMaterialTopTabNavigator();
 
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName="Pokemons"
+      tabBarPosition="bottom"
+      tabBarOptions={{
+        style: {
+          marginHorizontal: 7,
+          paddingBottom: 10,
+          shadowOpacity: 0,
+          shadowOffset: {
+            height: 0,
+            width: 0,
+          },
+          elevation: 0,
+          shadowRadius: 0,
+          
+        },
+        indicatorStyle: {
+          backgroundColor: 'darkgreen',
+          marginBottom: 5,
+          width: '5%',
+          marginLeft: '10%',
+        },
+        labelStyle: {
+          fontSize: 12,
+        },
+        activeTintColor: 'darkgreen',
+        inactiveTintColor: 'grey'
+      }}>
+      <Tab.Screen name="All" component={Coupons} />
+      <Tab.Screen name="Food" component={Coupons} />
+      <Tab.Screen name="Movies" component={Coupons} />
+      <Tab.Screen name="Shop" component={Coupons} />
+      <Tab.Screen name="Travel" component={Coupons} />
+      {/* <Tab.Screen name="Items" component={Coupons} /> */}
+    </Tab.Navigator>
+  );
+};
 
 
 
@@ -21,7 +62,34 @@ export default function App() {
     <NativeBaseProvider>
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="Home" component={Coupons} /> */}
+      <Stack.Screen
+          name="Home"
+          component={TabNavigator}
+          options={({navigation}) => ({
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            
+            headerRight: () =>  <View style={styles.headerRight}>
+            <TouchableOpacity>
+            <Image
+        source={require('./Components/assets/IconToogle.png')}
+      />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ marginLeft: 10 }}
+              // onPress={playgroundNavigate}
+            >
+              <Image
+        source={require('./Components/assets/Profile.png')}
+      />
+            </TouchableOpacity>
+          </View>,
+            headerLeft: () => <Image
+            source={require('./Components/assets/LogoCubmu.png')}
+          />,
+          })}
+        />
         <Stack.Screen
           name=" "
           component={Coupons}
@@ -34,22 +102,18 @@ export default function App() {
             headerRight: () =>  <View style={styles.headerRight}>
             <TouchableOpacity>
             <Image
-        // style={{width: 50, height: 50, marginHorizontal:13 }}
         source={require('./Components/assets/IconToogle.png')}
       />
             </TouchableOpacity>
             <TouchableOpacity
               style={{ marginLeft: 10 }}
-              // onPress={playgroundNavigate}
             >
               <Image
-        // style={{width: 50, height: 50, marginHorizontal:13 }}
         source={require('./Components/assets/Profile.png')}
       />
             </TouchableOpacity>
           </View>,
             headerLeft: () => <Image
-            // style={{width: 350, height: 350, marginHorizontal:13 }}
             source={require('./Components/assets/LogoCubmu.png')}
           />,
           })}

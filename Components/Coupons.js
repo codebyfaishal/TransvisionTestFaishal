@@ -86,7 +86,7 @@ const Coupons = props => {
                                             borderRadius: 3,
                                             marginTop: 15,
                                         }}>
-                                            <Button colorScheme="emerald" onPress={() => console.log("hello world")}>Click Me</Button>
+                                            <Button colorScheme="emerald">Tukarkan</Button>
                                         </View>
                                     </View>
 
