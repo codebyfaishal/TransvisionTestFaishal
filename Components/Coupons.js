@@ -80,7 +80,7 @@ const Coupons = props => {
                                             justifyContent: 'center',
                                             color: '#868788'
                                         }}>{"Off"}</Text></Text>
-                                        <Text style={styles.promo}>{"Promo Sampai"} {moment(coupon.couponEndDate).format('DD-MMM-YYYY')}</Text>
+                                        <Text style={styles.promo}>{"Promo Sampai"} {moment(coupon.couponEndDate).format('DD MMMM YYYY')}</Text>
                                         <View style={{
                                             width: '100%',
                                             borderRadius: 3,

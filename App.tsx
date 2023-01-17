@@ -17,7 +17,7 @@ const Tab = createMaterialTopTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Pokemons"
+      initialRouteName="Coupons"
       tabBarPosition="bottom"
       tabBarOptions={{
         style: {
@@ -93,30 +93,6 @@ export default function App() {
         <Stack.Screen
           name=" "
           component={Coupons}
-          options={({navigation}) => ({
-            // headerTitle: () => <Text>Register</Text>,
-            headerStyle: {
-              backgroundColor: 'black',
-            },
-            
-            headerRight: () =>  <View style={styles.headerRight}>
-            <TouchableOpacity>
-            <Image
-        source={require('./Components/assets/IconToogle.png')}
-      />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{ marginLeft: 10 }}
-            >
-              <Image
-        source={require('./Components/assets/Profile.png')}
-      />
-            </TouchableOpacity>
-          </View>,
-            headerLeft: () => <Image
-            source={require('./Components/assets/LogoCubmu.png')}
-          />,
-          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
