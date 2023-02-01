@@ -12,10 +12,17 @@ import {
 import axios from 'axios';
 import moment from 'moment';
 import { Button } from "native-base";
+import { Actionsheet } from "native-base";
+import { useDisclose } from 'native-base';
 
 const Coupons = props => {
     const [coupons, setCoupons] = useState([]);
     const [loading, setLoading] = useState(true);
+    const {
+        isOpen,
+        onOpen,
+        onClose
+      } = useDisclose();
 
     useEffect(() => {
         fetchCoupons();
@@ -86,8 +93,42 @@ const Coupons = props => {
                                             borderRadius: 3,
                                             marginTop: 15,
                                         }}>
-                                            <Button colorScheme="emerald">Tukarkan</Button>
+                                            <Button colorScheme="emerald" onPress={onOpen}>Tukarkan</Button>
                                         </View>
+                                        <Actionsheet isOpen={isOpen} onClose={onClose}>
+        <Actionsheet.Content>
+
+            {/* //DETAIL */}
+        <TouchableOpacity style={styles.card}
+                                    key={index}>
+                                    <Image
+                                        style={styles.thumb}
+                                        source={{ uri: coupon.couponBrandLogo }}
+                                    />
+                                    <View style={styles.infoContainer}>
+                                        <Text style={styles.name}>{coupon.couponBrandName}</Text>
+                                        <Text style={styles.discount}>{coupon.couponQuota}{"%"} <Text style={{
+                                            fontSize: 16,
+                                            fontWeight: 'bold',
+                                            marginTop: 15,
+                                            alignItems: 'flex-start',
+                                            justifyContent: 'center',
+                                            color: '#868788'
+                                        }}>{"Off"}</Text></Text>
+                                        <Text style={styles.promo}>{"Promo Sampai"} {moment(coupon.couponEndDate).format('DD MMMM YYYY')}</Text>
+                                        <View style={{
+                                            width: '100%',
+                                            borderRadius: 3,
+                                            marginTop: 15,
+                                        }}>
+                                        </View>
+                         
+                                    </View>
+
+
+                                </TouchableOpacity>
+        </Actionsheet.Content>
+      </Actionsheet>
                                     </View>
 
 
